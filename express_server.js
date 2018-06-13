@@ -16,6 +16,7 @@ function generateRandomString() {
   return randomURL;
 }
 
+
 var urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
   "9sm5xK": "http://www.google.com"
@@ -28,10 +29,6 @@ app.get("/", (req, res) => {
 app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
-
-app.get("/hello", (req, res) => {
-  res.end("<html><body>Hello <b>World</b></html>\n")
-})
 
 app.get("/urls", (req, res) => {
   let templateVars = { urls: urlDatabase };
@@ -51,8 +48,25 @@ app.get("/urls/:id", (req, res) => {
 })
 
 app.post("/urls", (req, res) => {
-  console.log(req.body);  // debug statement to see POST parameters
-  res.send("Ok");         // Respond with 'Ok' (we will replace this)
+  var shortURL = generateRandomString();
+  var longURL = req.body.longURL;
+  urlDatabase[shortURL] = longURL;
+  res.redirect(`http://localhost:8080/urls/${shortURL}`);
+});
+
+app.post("/urls/:id/edit", (req, res) => {
+  urlDatabase[req.params.id] = req.body.longURL;
+  res.redirect("/urls")
+})
+
+app.post("/urls/:id/delete", (req, res) => {
+  delete urlDatabase[req.params.id];
+  res.redirect("/urls")
+})
+
+app.get("/u/:shortURL", (req, res) => {
+  let longURL = urlDatabase[req.params.shortURL];
+  res.redirect(longURL);
 });
 
 app.listen(PORT, () => {

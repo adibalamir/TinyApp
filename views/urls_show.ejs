@@ -4,10 +4,32 @@
   <title>TinyApp</title>
 </head>
 <body>
+  <a href="/urls">Back to URLS</a>
   <% include ./partials/_header.ejs %>
-  <%= longURL %>
-  -
-  <%= shortURL %>
+  <table>
+    <thead>
+      <tr>
+        <th>LongURL</th>
+        <th></th>
+        <th>ShortURL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= longURL %></td>
+        <td>: </td>
+        <td><%= shortURL %></td>
+      </tr>
+      <tr>
+        <td style="padding: 20px">
+          <form action="/urls/<%= shortURL %>/edit" method="POST">
+            <input type="text" name="longURL" placeholder="http://Enter a 'long' URL">
+            <input type="submit" value="Submit">
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
 

@@ -2,29 +2,38 @@
 <html lang = "en">
 <head>
   <title>TinyApp</title>
+  <link href="./style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
   <% include ./partials/_header.ejs %>
-  <table class="table">
-        <thead>
-          <tr>
-            <th>ShortURL</th>
-            <th>LongURL</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (item in urls) { %>
-          <tr>
-            <td><%= item %></td>
-            <td><%= urls[item] %></td>
-          </tr>
-          <% } %>
-          <tr>
-            <td colSpan="2">
-              <a href="/urls/new">Short URL</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <table>
+    <thead>
+      <tr>
+        <th>ShortURL</th>
+        <th>LongURL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (item in urls) { %>
+      <tr>
+        <td><%= item %></td>
+        <td><%= urls[item] %></td>
+        <td>
+        <a href="/urls/<%= item %>">Edit</a>
+        </td>
+        <td>
+          <form action="/urls/<%= item %>/delete" method="POST">
+            <input type="submit" value="Delete" />
+          </form>
+        </td>
+      </tr>
+      <% } %>
+      <tr>
+        <td colSpan="2">
+          <a href="/urls/new">New URL</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
