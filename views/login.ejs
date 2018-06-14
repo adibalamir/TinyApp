@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>
+    TinyApp
+  </title>
+</head>
+<body>
+  <h2 class="login">Login:</h2>
+  <% if (!user) { %> <!--If user is not logged in-->
+    <form action="/login" method="POST" style="margin-bottom: 20px;">
+      Email:<br>
+      <input type="email" name="email"><br>
+      Password:<br>
+      <input type="password" name="password">
+      <input type="submit" value="Submit"><br>
+      <a href="/register">Register</a>
+    </form>
+  <% }else{ %> <!--If user is logged in-->
+    <form action="/logout" method="POST" style="margin-bottom: 20px;">
+      <%= user %>
+      <input type="submit" value="Logout">
+    </form>
+  <% } %>
+</body>
+</html>
