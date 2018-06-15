@@ -4,15 +4,17 @@
     <% include ./partials/head.ejs %>
   </head>
   <body style="font-size:20px; padding:50px;">
+  <div class="container = fluid">
     <a href="/urls">Back to URLS</a>
-    <div style="color:blue;font-size:40px;text-align:center;margin-top: 20px;">TinyApp</div>
+    <div style="color:blue;font-size:40px;text-align:center;margin-bottom: 20px;">TinyApp</div>
     <% include partials/_header %>
     <div style="text-align: center">
-      <form action="/urls" method="POST" style="margin:150px;">
+      <form action="/urls" method="POST";">
         <label for="longURL">Enter a URL:</label>
-        <input id="longURL" type="text" name="longURL" placeholder="http://" style="width: 300px">
+        <input id="longURL" type="text" name="longURL" value="http://" style="width: 380px">
         <input type="submit" value="Submit">
       </form>
     </div>
+  </div>
   </body>
 </html>

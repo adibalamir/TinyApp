@@ -4,18 +4,19 @@
   <% include ./partials/head.ejs %>
 </head>
 <body>
-  <div style="color:blue;font-size:40px;text-align:center;margin-top: 20px;">TinyApp</div>
+  <div style="color:blue;font-size:40px; margin-bottom: 20px; text-align: center;">TinyApp</div>
   <% include ./partials/_header.ejs %>
+<div class="container = fluid">
   <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">LongURL</th>
-        <th scope="col">ShortURL</th>
+        <th scope="col" colspan="3">ShortURL</th>
       </tr>
     </thead>
     <tbody>
-      <div class="row">
-        <% for (item in urls) { %>
+    <% for (item in urls) { %>
+      <tr>
         <td><%= urls[item].longURL %></td>
         <td><a href="/u/<%= item %>"><%= item %></td></a>
         <td>
@@ -26,14 +27,15 @@
             <input type="submit" value="Delete" class="btn btn-primary"/>
           </form>
         </td>
-      </div>
-        <% } %>
+      </tr>
+    <% } %>
       <tr>
-        <td>
+        <td colspan="4">
           <a href="/urls/new">New URL</a>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
 </body>
 </html>

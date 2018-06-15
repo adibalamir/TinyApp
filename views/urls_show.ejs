@@ -7,18 +7,17 @@
   <a href="/urls">Back to URLS</a>
   <div style="color:blue;font-size:40px;text-align:center;margin-top: 20px;">TinyApp</div>
   <% include ./partials/_header.ejs %>
-  <table>
+<div class="container = fluid">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>LongURL</th>
-        <th></th>
         <th>ShortURL</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><%= longURL %></td>
-        <td>: </td>
         <td><%= shortURL %></td>
       </tr>
       <tr>
@@ -31,6 +30,7 @@
       </tr>
     </tbody>
   </table>
+</div>
 </body>
 </html>
 

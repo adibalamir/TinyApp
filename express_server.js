@@ -80,7 +80,7 @@ app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
 
-//TINYURLS PAGE
+//URLS PAGE
 app.get("/urls", (req, res) => {
   const user_urls = urlsForUser(req.session['user_id']);
   const templateVars = {
