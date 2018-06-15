@@ -4,6 +4,10 @@
   <% include ./partials/head.ejs %>
 </head>
 <body>
+<div class="container = fluid">
+  <div style="color:blue;font-size:50px; margin-bottom: 20px; margin-top: 20px; text-align: left;">
+  TinyApp
+  </div>
   <form action="/register" method="POST">
       Email:<br>
       <input type="email" name="email"><br>
@@ -12,5 +16,6 @@
       <input type="submit" value="Register">
   </form>
   <a href="/login">Back</a>
+</div>
 </body>
 </html>
