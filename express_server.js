@@ -42,27 +42,17 @@ function urlsForUser(id) {
 
 //Data
 var urlDatabase = {
-  "b2xVn2": {
-    userID: 'userRandomID',
-    longURL: "http://www.lighthouselabs.ca"
-    },
-  "9sm5xK": {
-    userID: 'user2RandomID',
-    longURL: "http://www.google.com"
-    },
+  // "b2xVn2": {
+  //   userID: 'userRandomID',
+  //   longURL: "http://www.lighthouselabs.ca"
+  //   },
+  // "9sm5xK": {
+  //   userID: 'user2RandomID',
+  //   longURL: "http://www.google.com"
+  //   },
 };
 
 const users = {
- //  "userRandomID": {
- //    id: "userRandomID",
- //    email: "user@example.com",
- //    hashedPassword: "purple-monkey-dinosaur"
- //  },
- // "user2RandomID": {
- //    id: "user2RandomID",
- //    email: "user2@example.com",
- //    hashedPassword: "dishwasher-funk"
- //  },
  //  "user3RandomID": {
  //    id: "user3RandomID",
  //    email: "example@email.com",

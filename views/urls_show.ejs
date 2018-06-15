@@ -4,10 +4,10 @@
   <% include ./partials/head.ejs %>
 </head>
 <body>
+<div class="container = fluid">
   <a href="/urls">Back to URLS</a>
   <div style="color:blue;font-size:40px;text-align:center;margin-top: 20px;">TinyApp</div>
   <% include ./partials/_header.ejs %>
-<div class="container = fluid">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -23,7 +23,7 @@
       <tr>
         <td style="padding: 20px">
           <form action="/urls/<%= shortURL %>/edit" method="POST">
-            <input type="text" name="longURL" placeholder="http://Enter a 'long' URL">
+            <input style="width: 380px" type="text" name="longURL" value="http://">
             <input type="submit" value="Update">
           </form>
         </td>
