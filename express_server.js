@@ -72,15 +72,15 @@ const users = {
 
 /*---------------------------PAGES----------------------------------------------------------------------------------*/
 //root
-app.get("/", (req, res) => {
+/*app.get("/", (req, res) => {
   res.end("Hello!");
-});
-//parsed URL database
+});*/
+//JSON URL database
 app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
 
-//INDEX PAGE
+//TINYURLS PAGE
 app.get("/urls", (req, res) => {
   const user_urls = urlsForUser(req.session['user_id']);
   const templateVars = {

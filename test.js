@@ -1,9 +1,10 @@
- const something = {
-  rj14eq: { userID: 'user3RandomID', longURL: 'http://wikipedia.org' },
-  m0wmcc: { userID: 'user3RandomID', longURL: 'http://www.google.com' }
+function generateRandomString() {
+  let alphnum = 'qwertyuiopasdfghjklzxcvbnm1234567890';
+  let randomURL = '';
+  for (let i = 0; i < 8; i++) {
+    randomURL += alphnum[Math.floor(Math.random()*36)];
+  }
+  return randomURL;
 }
-console.log(something);
 
-delete something['rj14eq'];
-
-console.log(something);
+console.log(generateRandomString());
