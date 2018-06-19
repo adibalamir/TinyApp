@@ -67,7 +67,7 @@ const users = {
 });*/
 //JSON URL database
 app.get("/urls.json", (req, res) => {
-  res.json(urlDatabase);
+  res.json(users);
 });
 
 //URLS PAGE
@@ -147,15 +147,28 @@ app.post("/register", (req, res) => {
   let user_id = generateRandomString();
   let email = req.body.email;
   let password = req.body.password;
+  let registered = false;
   const hashedPassword = bcrypt.hashSync(password, 10);
-  users[user_id] = {
-    'id': user_id,
-    'email': email,
-    'password': hashedPassword
+  if (!email) {
+    res.status(400).send("Error 400: no email entered!");
   }
-  if (!email || !password) {
-    res.status(400).send("Error: 400");
+  if (!password) {
+    res.status(400).send("Error 400: no password enterd!");
   }
+  for (let id in users) {
+    if (users[id].email === email) {
+      registered = true;
+      res.status(400).send("Already registered! Please log in.");
+    }
+  }
+  if (registered === false){
+    users[user_id] = {
+      'id': user_id,
+      'email': email,
+      'password': hashedPassword
+    }
+  }
+  console.log(users[user_id]);
   req.session['user_id'] = user_id;
   res.redirect("/urls");
 })
@@ -165,10 +178,15 @@ app.post("/login", (req, res) => {
     if (users[user].email === req.body.email && bcrypt.compareSync(req.body.password, users[user].password)) {
       req.session['user_id'] = users[user].id;
       res.redirect("/urls");
-      return
+      return;
     }
   }
-  res.status(403).send("Error: 403");
+  if (!req.body.email) {
+    res.status(403).send("Error: Missing email!");
+  }
+  if (!req.body.password) {
+    res.status(403).send("Error: Missing password!")
+  }
 })
 
 app.post("/logout", (req, res) => {
