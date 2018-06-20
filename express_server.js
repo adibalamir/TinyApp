@@ -17,7 +17,8 @@ app.use(cookieSession({
   // Cookie Options
 }))
 
-//functions
+/*--functions--*/
+//generates a user ID
 function generateRandomString() {
   let alphnum = 'qwertyuiopasdfghjklzxcvbnm1234567890';
   let randomURL = '';
@@ -27,6 +28,7 @@ function generateRandomString() {
   return randomURL;
 }
 
+//makes a user object
 function urlsForUser(id) {
   let filteredData = {};
   for (let shortURL in urlDatabase) {
@@ -40,18 +42,14 @@ function urlsForUser(id) {
   return filteredData;
 }
 
-//Data
+//urls Data
 var urlDatabase = {
   // "b2xVn2": {
   //   userID: 'userRandomID',
   //   longURL: "http://www.lighthouselabs.ca"
-  //   },
-  // "9sm5xK": {
-  //   userID: 'user2RandomID',
-  //   longURL: "http://www.google.com"
-  //   },
+  //   }
 };
-
+//user database
 const users = {
  //  "user3RandomID": {
  //    id: "user3RandomID",
@@ -61,10 +59,6 @@ const users = {
 };
 
 /*---------------------------PAGES----------------------------------------------------------------------------------*/
-//root
-/*app.get("/", (req, res) => {
-  res.end("Hello!");
-});*/
 //JSON URL database
 app.get("/urls.json", (req, res) => {
   res.json(users);
@@ -117,6 +111,7 @@ app.get("/login", (req, res) => {
 })
 /*-----------------------------------------------------------------------------------------------------------------------*/
 /*-------------FEATURES-----------------------------------------------------------------------------------------------------*/
+//creates a new url and renders it on /urls page
 app.post("/urls", (req, res) => {
   var shortURL = generateRandomString();
   var longURL = req.body.longURL;
@@ -127,22 +122,28 @@ app.post("/urls", (req, res) => {
   console.log(urlDatabase);
   res.redirect(`http://localhost:8080/urls/${shortURL}`);
 });
-
+//edit url
 app.post("/urls/:id/edit", (req, res) => {
   if (urlDatabase[req.params.id].userID === req.session['user_id']) {
     urlDatabase[req.params.id].longURL = req.body.longURL;
   }
   res.redirect("/urls")
 })
-
+//delete url
 app.post("/urls/:id/delete", (req, res) => {
   if (urlDatabase[req.params.id].userID === req.session['user_id']) {
     delete urlDatabase[req.params.id];
   }
   res.redirect("/urls")
 })
+//shortURL link
+app.get("/u/:shortURL", (req, res) => {
+  let longURL = urlDatabase[req.params.shortURL].longURL;
+  res.redirect(longURL);
+});
 /*-------------------------------------------------------------------------------------------------------------------*/
 /*-------------LOGIN AND REGISTRATION--------------------------------------------------------------------------------*/
+//Registration endpoint
 app.post("/register", (req, res) => {
   let user_id = generateRandomString();
   let email = req.body.email;
@@ -172,7 +173,7 @@ app.post("/register", (req, res) => {
   req.session['user_id'] = user_id;
   res.redirect("/urls");
 })
-
+//Login endpoint
 app.post("/login", (req, res) => {
   for (let user in users) {
     if (users[user].email === req.body.email && bcrypt.compareSync(req.body.password, users[user].password)) {
@@ -188,17 +189,12 @@ app.post("/login", (req, res) => {
     res.status(403).send("Error: Missing password!")
   }
 })
-
+//Logs user out and removes session cookie
 app.post("/logout", (req, res) => {
   req.session = null;
   res.redirect("/urls");
 })
 /*-------------------------------------------------------------------------------------------------------------------*/
-
-app.get("/u/:shortURL", (req, res) => {
-  let longURL = urlDatabase[req.params.shortURL].longURL;
-  res.redirect(longURL);
-});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
